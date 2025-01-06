@@ -18,7 +18,7 @@ export const getTeacher = async (): Promise<TeacherDto[]> => {
   return [
     {
       IdTeacher: 1,
-      FirstName: "Juan",
+      FirstName: "Juan Antonio",
       Position: "Ingeniero en informatica y sistemas",
       Image:
         "https://s3.abcstatics.com/media/summum/2021/10/01/maxi_iglesias-kU2E--1248x698@abc.jpeg",

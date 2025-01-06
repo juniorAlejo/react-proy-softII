@@ -77,9 +77,7 @@ export const TeacherDetail: React.FC = () => {
           </p>
         </div>
 
-        <div className="fixed bottom-8 right-8 bg-black p-4 rounded-full shadow-lg flex items-center justify-center cursor-pointer">
-          <span className="text-teal-400 font-bold text-xl">V</span>
-        </div>
+        
       </section>
       <section className="mt-8 px-4 max-w-6xl mx-auto mb-12">
         <div className="mb-8">

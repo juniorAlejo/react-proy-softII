@@ -44,6 +44,11 @@ export const ScientificArticleDetail: React.FC = () => {
                 <span className="font-bold">Autor(es):</span>
                 <p className="text-primary">{article.Authors}</p>
               </p>
+              <p className="text-gray-600"></p>
+              <p className="text-gray-600">
+                <span className="font-bold">Estado:</span>
+                <p>Proceso</p>
+              </p>
             </div>
           </div>
 

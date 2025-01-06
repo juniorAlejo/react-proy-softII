@@ -47,7 +47,7 @@ export const ResearchProject = () => {
                 <AiOutlineSearch size={20} className="text-gray-400 mr-2" />
                 <input
                   type="text"
-                  placeholder="Buscar artículos..."
+                  placeholder="Buscar Proyectos..."
                   className="flex-grow text-lg focus:outline-none"
                 />
               </div>
