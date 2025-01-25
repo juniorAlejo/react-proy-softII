@@ -1,6 +1,12 @@
 export const Hero = () => {
   return (
-    <section className="h-[520px] bg-hero bg-no-repeat bg-center bg-cover py-24 mt-20 relative">
+    <section
+      className="h-[520px] bg-no-repeat bg-center bg-cover py-24 mt-20 relative"
+      style={{
+        backgroundImage:
+          'url("https://www.unamba.edu.pe/media/k2/items/cache/6af8f580e799444e5a52119018e87a65_XL.jpg")',
+      }}
+    >
       <div className="container mx-10 h-full relative">
         <div className="flex">
           <h3 className="text-4xl text-white md:text-4xl font-bold mb-4 drop-shadow-lg">

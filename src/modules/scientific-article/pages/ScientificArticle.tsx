@@ -3,29 +3,49 @@ import { AiFillBook, AiFillFilePdf, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { getScientificArticle } from "../../../services/ScientificArticle";
 import { ScientificArticleDto } from "../../../types/ScientificArticle";
+import { formatDate } from "../../../utils/util";
 
 export const ScientificArticle = () => {
-  const [article, setArticles] = useState<ScientificArticleDto[]>([]);
+  const [articles, setArticles] = useState<ScientificArticleDto[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<
+    ScientificArticleDto[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+  const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
 
-  //---------------------------------------------------------------- GET TEACHERS
+  // ---------------------------------------------------------------- GET ARTICLES
   useEffect(() => {
-    const loadProducts = async () => {
+    const loadArticles = async () => {
       try {
         setLoading(true);
-        const articles = await getScientificArticle();
-        setArticles(articles);
+        const fetchedArticles = await getScientificArticle();
+        setArticles(fetchedArticles);
+        setFilteredArticles(fetchedArticles);
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch articles:", error);
       }
     };
-    loadProducts();
+    loadArticles();
   }, []);
 
+  // ---------------------------------------------------------------- FILTER ARTICLES LEVEL OR SEARCH
+  useEffect(() => {
+    const filtered = articles.filter((article) => {
+      const matchesLevel =
+        selectedLevel === null || article.idNivel === selectedLevel;
+      const matchesSearch = article.name
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+      return matchesLevel && matchesSearch;
+    });
+    setFilteredArticles(filtered);
+  }, [selectedLevel, searchText, articles]);
+
   const handleCardClick = (article: ScientificArticleDto) => {
-    navigate(`/scientific-article/${article.IdScientificArticle}`, {
+    navigate(`/student/scientific-article/${article.idScientificArticle}`, {
       state: article,
     });
   };
@@ -43,66 +63,81 @@ export const ScientificArticle = () => {
             </div>
 
             <div className="mt-6 w-full flex items-center gap-2">
-              <div className=" w-full flex items-center border border-gray-300 rounded-lg px-4 py-2 focus-within:ring-2 focus-within:ring-primary_light">
+              <div className="w-full flex items-center border border-gray-300 rounded-lg px-4 py-2 focus-within:ring-2 focus-within:ring-primary_light">
                 <AiOutlineSearch size={20} className="text-gray-400 mr-2" />
                 <input
                   type="text"
                   placeholder="Buscar artículos..."
                   className="flex-grow text-lg focus:outline-none"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
                 />
               </div>
 
-              <button className="bg-secondary_light hover:bg-primary text-white font-bold px-6 py-3 rounded-md">
-                Buscar
+              <button
+                className="bg-secondary_light hover:bg-primary text-white font-bold px-6 py-3 rounded-md"
+                onClick={() => setSearchText("")}
+              >
+                Limpiar
               </button>
             </div>
           </div>
 
           <div className="w-full flex flex-row mt-4">
             {loading ? (
-              <div className="w-3/4 text-center">Cargando articulos...</div>
+              <div className="w-3/4 text-center">Cargando artículos...</div>
             ) : (
               <section className="w-3/4">
-                {article.map((article) => (
-                  <article
-                    key={article.IdScientificArticle}
-                    className="bg-white shadow-md rounded-lg p-4 mb-4"
-                  >
-                    <a
-                      className="text-blue-600 text-lg font-bold hover:underline cursor-pointer"
-                      onClick={() => handleCardClick(article)}
+                {filteredArticles.length > 0 ? (
+                  filteredArticles.map((article) => (
+                    <article
+                      key={article.idScientificArticle}
+                      className="bg-white shadow-md rounded-lg p-4 mb-4"
                     >
-                      {article.Name}
-                    </a>
-                    <p className="text-gray-400 text-sm">fecha: {article.Date}</p>
-                    <p className="text-gray-900 text-sm">
-                      Doi:{" "}
                       <a
-                        href="#"
-                        className="text-secondary_light hover:underline"
+                        className="text-blue-600 text-lg font-bold hover:underline cursor-pointer"
+                        onClick={() => handleCardClick(article)}
                       >
-                        {article.Doi}
+                        {article.name}
                       </a>
-                    </p>
-                    <p className="text-gray-900 text-sm">
-                      <p>
-                        Autores:{" "}
-                        <span className="text-secondary_light">
-                          {article.Authors}
-                        </span>
+                      <p className="text-gray-400 text-sm">
+                        Año {formatDate(article.date)}
                       </p>
-                    </p>
-                    <p className="text-gray-700 mt-2">{article.Description}</p>
-                    <a
-                      href={article.Pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-auto max-w-24 flex items-center mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
-                    >
-                      <AiFillFilePdf size={20} className="mr-2" /> PDF
-                    </a>
-                  </article>
-                ))}
+                      <p className="text-gray-900 text-sm">
+                        Doi:{" "}
+                        <a
+                          href="#"
+                          className="text-secondary_light hover:underline"
+                        >
+                          {article.doi}
+                        </a>
+                      </p>
+                      <p className="text-gray-900 text-sm">
+                        <p>
+                          Autores:{" "}
+                          <span className="text-secondary_light">
+                            {article.authors}
+                          </span>
+                        </p>
+                      </p>
+                      <p className="text-gray-700 mt-2">
+                        {article.description}
+                      </p>
+                      <a
+                        href={article.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-auto max-w-24 flex items-center mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+                      >
+                        <AiFillFilePdf size={20} className="mr-2" /> PDF
+                      </a>
+                    </article>
+                  ))
+                ) : (
+                  <div className="text-gray-500 text-center">
+                    No se encontraron artículos.
+                  </div>
+                )}
               </section>
             )}
             <aside className="w-1/4 h-[250px] bg-[#F8F8F8] p-4 rounded-lg ml-4">
@@ -110,16 +145,24 @@ export const ScientificArticle = () => {
                 Listar a nivel:
               </h3>
               <ul className="space-y-2">
-                {["Revistas", "Procidis", "Patentes", "Conferencia"].map(
-                  (item) => (
-                    <li
-                      key={item}
-                      className="text-gray-700 hover:text-blue-500 cursor-pointer"
-                    >
-                      {item}
-                    </li>
-                  )
-                )}
+                {[
+                  { id: null, name: "Todos" },
+                  { id: 1, name: "Revistas" },
+                  { id: 2, name: "Procidis" },
+                  { id: 3, name: "Patentes" },
+                ].map((level) => (
+                  <li
+                    key={level.id}
+                    className={`cursor-pointer ${
+                      selectedLevel === level.id
+                        ? "text-blue-500 font-bold"
+                        : "text-gray-700"
+                    }`}
+                    onClick={() => setSelectedLevel(level.id)}
+                  >
+                    {level.name}
+                  </li>
+                ))}
               </ul>
             </aside>
           </div>

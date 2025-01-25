@@ -20,7 +20,7 @@ export const TeacherDetail: React.FC = () => {
         <div className="bg-[#F8F8F8] p-6 w-full sm:w-1/3 text-center flex flex-col items-center">
           <div className="w-40 h-40 bg-[#ffffff] rounded-md overflow-hidden flex items-center justify-center mb-4">
             <img
-              src={docente.Image}
+              src={docente.image}
               alt="Foto del Profesor"
               className="w-full h-full object-cover"
             />
@@ -28,7 +28,7 @@ export const TeacherDetail: React.FC = () => {
           <ul className="text-gray-700 space-y-2 text-left w-full">
             <li className="flex justify-between">
               <span className="font-bold">Género:</span>
-              <span>{docente.Gender ? "Masculino" : "Femenino"}</span>
+              <span>{docente.gender ? "Masculino" : "Femenino"}</span>
             </li>
 
             <li className="flex justify-between">
@@ -37,12 +37,12 @@ export const TeacherDetail: React.FC = () => {
             </li>
             <li className="flex justify-between">
               <span className="font-bold">Código de Registro:</span>
-              <span>{docente.RegistrationCode}</span>
+              <span>{docente.registrationCode}</span>
             </li>
           </ul>
           <div className="flex justify-center space-x-4 mt-4">
             <a
-              href={docente.Facebook}
+              href={docente.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="text-secondary_light text-xl cursor-pointer"
@@ -51,14 +51,14 @@ export const TeacherDetail: React.FC = () => {
             </a>
 
             <a
-              href={`mailto:${docente.Mail}`}
+              href={`mailto:${docente.mail}`}
               className="text-secondary_light text-xl cursor-pointer"
             >
               <FaEnvelope />
             </a>
 
             <a
-              href={docente.Linkedin}
+              href={docente.linkedIn}
               target="_blank"
               rel="noopener noreferrer"
               className="text-secondary_light text-xl cursor-pointer"
@@ -70,14 +70,14 @@ export const TeacherDetail: React.FC = () => {
 
         <div className="bg-[#F8F8F8] p-6  w-full sm:w-2/3">
           <h2 className="text-secondary_light text-xl font-bold mb-4 uppercase">
-            {docente.FirstName} {docente.LastName}
+            {docente.firstName} {docente.lastName}
           </h2>
           <p className="text-black leading-7 text-justify">
-            {docente.Description}
+            {docente.description}
           </p>
         </div>
 
-        
+       
       </section>
       <section className="mt-8 px-4 max-w-6xl mx-auto mb-12">
         <div className="mb-8">
@@ -98,24 +98,24 @@ export const TeacherDetail: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {docente.WorkExperiences.map((work, index) => (
+              {docente.workExperiences.map((work, index) => (
                 <tr key={index}>
                   <td className="border border-gray-300 p-2">
-                    {work.Institution}
+                    {work.companyName}
                   </td>
-                  <td className="border border-gray-300 p-2">{work.Job}</td>
+                  <td className="border border-gray-300 p-2">{work.position}</td>
                   <td className="border border-gray-300 p-2">
-                    {work.JobDescription}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {work.JobIDI || "---"}
+                    {work.jobDescription}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(work.StartDate).toLocaleDateString()}
+                    {work.jobIdi}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {work.EndDate
-                      ? new Date(work.EndDate).toLocaleDateString()
+                    {new Date(work.startDate).toLocaleDateString()}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {work.endDate
+                      ? new Date(work.endDate).toLocaleDateString()
                       : "A la actualidad"}
                   </td>
                 </tr>
@@ -142,26 +142,26 @@ export const TeacherDetail: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {docente.TeachingExperiences.map((teaching, index) => (
+              {docente.teachingExperiences.map((teaching, index) => (
                 <tr key={index}>
                   <td className="border border-gray-300 p-2">
-                    {teaching.Institution}
+                    {teaching.institution}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {teaching.InstitutionType}
+                    {teaching.institutionType}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {teaching.TeacherType}
+                    {teaching.teacherType}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {teaching.JobDescription}
+                    {teaching.jobDescription}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(teaching.StartDate).toLocaleDateString()}
+                    {new Date(teaching.startDate).toLocaleDateString()}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {teaching.EndDate
-                      ? new Date(teaching.EndDate).toLocaleDateString()
+                    {teaching.endDate
+                      ? new Date(teaching.endDate).toLocaleDateString()
                       : "A la actualidad"}
                   </td>
                 </tr>
@@ -187,20 +187,20 @@ export const TeacherDetail: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {docente.ThesisAdvisingExperiences.map((thesis, index) => (
+              {docente.thesisAdvisingExperiences.map((thesis, index) => (
                 <tr key={index}>
                   <td className="border border-gray-300 p-2">
-                    {thesis.University}
+                    {thesis.university}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {thesis.Thesis}
+                    {thesis.thesis}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {thesis.ThesisStudent}
+                    {thesis.thesisStudent}
                   </td>
                   <td className="border border-gray-300 p-2 text-center">
                     <a
-                      href={thesis.Repository}
+                      href={thesis.repository}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -208,7 +208,7 @@ export const TeacherDetail: React.FC = () => {
                     </a>
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {new Date(thesis.ThesisAcceptanceDate).toLocaleDateString()}
+                    {new Date(thesis.thesisAcceptanceDate).toLocaleDateString()}
                   </td>
                 </tr>
               ))}

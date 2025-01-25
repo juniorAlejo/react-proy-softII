@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import caratula from "../../../assets/img/caratula.png";
 import { ResearchProjectDto } from "../../../types/ResearchProject";
+import { formatDateComplete } from "../../../utils/util";
 
 export const ResearchProjectDetail: React.FC = () => {
   const { state } = useLocation();
@@ -31,7 +32,7 @@ export const ResearchProjectDetail: React.FC = () => {
               />
             </div>
             <a
-              href={project.Pdf}
+              href={project.pdf}
               target="_blank"
               rel="noopener noreferrer"
               className="w-auto max-w-34 flex items-center mt-2 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
@@ -40,11 +41,11 @@ export const ResearchProjectDetail: React.FC = () => {
             </a>
             <div className="mt-4 space-y-2 text-sm">
               <p className="text-gray-600">
-                <span className="font-bold">Fecha:</span> <p>{project.Date}</p>
+                <span className="font-bold">Fecha:</span> <p>{formatDateComplete(project.date)}</p>
               </p>
               <p className="text-gray-600">
                 <span className="font-bold">Autor(es):</span>
-                <p className="text-primary">{project.Authors}</p>
+                <p className="text-primary">{project.authors}</p>
               </p>
             </div>
           </div>
@@ -52,16 +53,16 @@ export const ResearchProjectDetail: React.FC = () => {
           <div className="flex-1">
             <p className="text-gray-400">Resumen:</p>
             <p className="text-gray-700 leading-relaxed mb-6 text-sm text-justify">
-              {project.Summary}
+              {project.summary}
             </p>
             <div className="space-y-4 text-sm">
               <p className="text-gray-600 mb-4">
                 <p className="font-bold">URI:</p>
                 <a
-                  href={project.Doi}
+                  href={project.doi}
                   className="text-secondary_light underline"
                 >
-                  {project.Doi}
+                  {project.doi}
                 </a>
               </p>
               <p className="text-gray-600 mb-4">
@@ -69,12 +70,12 @@ export const ResearchProjectDetail: React.FC = () => {
                 <p>
                   Observatorio Tecnológico. (2024, diciembre). Boletín del
                   Observatorio Tecnológico, año 2 (4). Carrera de Ingeniería de
-                  Sistemas. Universidad de Lima. {project.Doi}
+                  Sistemas. Universidad de Lima. {project.doi}
                 </p>
               </p>
               <p className="text-gray-600 mb-4">
                 <span className="font-bold">Editor:</span>
-                <p>{project.Editor}</p>
+                <p>{project.editor}</p>
               </p>
 
               <p className="text-gray-600 mb-4">

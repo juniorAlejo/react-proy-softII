@@ -1,48 +1,49 @@
 export interface TeacherDto {
-    IdTeacher?: number;
-    FirstName: string;
-    LastName: string;
-    Gender:boolean;
-    Position: string;
-    Image?: string;
-    Facebook?:string;
-    Linkedin?:string;
-    RegistrationCode:string;
-    Mail?: string;
-    Phone?: string;
-    Description: string;
-    BirthDate?: string;
-    WorkExperiences: WorkExperience[]; 
-    TeachingExperiences: ExperienceTeacher[]; 
-    ThesisAdvisingExperiences: ExperienceThesisAdvisor[];
+    idTeacher?: number;
+    firstName: string;
+    lastName: string;
+    gender:boolean;
+    position: string;
+    image?: string;
+    facebook?:string;
+    linkedIn?:string;
+    registrationCode:string;
+    mail?: string;
+    phone?: string;
+    description: string;
+    birthDate?: string;
+    workExperiences: WorkExperience[]; 
+    teachingExperiences: ExperienceTeacher[]; 
+    thesisAdvisingExperiences: ExperienceThesisAdvisor[];
   }
   
   export interface WorkExperience {
-    Id?: number;
-    Institution: string;
-    Job: string;
-    JobDescription: string;
-    JobIDI: string;
-    StartDate: string;
-    EndDate?: string;
+    id?: number;
+    companyName: string;
+    position: string;
+    jobDescription: string;
+    jobIdi: string;
+    startDate: string;
+    endDate?: string;
+    isCurrent:boolean;
   }
   
   export interface ExperienceTeacher {
-    Id?: number;
-    Institution: string;
-    InstitutionType: string;
-    TeacherType: string;
-    JobDescription: string;
-    StartDate: string;
-    EndDate?: string;
+    id?: number;
+    institution: string;
+    institutionType: string;
+    teacherType: string;
+    jobDescription: string;
+    startDate: string;
+    endDate?: string;
   }
   
   export interface ExperienceThesisAdvisor {
-    Id?: number;
-    University: string;
-    Thesis: string;
-    ThesisStudent: string;
-    Repository: string;
-    ThesisAcceptanceDate: string;
+    id?: number;
+    university: string;
+    thesis: string;
+    thesisStudent: string;
+    repository: string;
+    thesisAcceptanceDate: string;
   }
   

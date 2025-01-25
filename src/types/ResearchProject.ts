@@ -1,11 +1,11 @@
 export interface ResearchProjectDto {
-  IdResearchProject: number;
-  Name: string;
-  Description: string;
-  Summary: string;
-  Date: string;
-  Doi: string;
-  Authors: string;
-  Pdf: string;
-  Editor:String
+  idResearchProject: number;
+  name: string;
+  description: string;
+  summary: string;
+  date: string;
+  doi: string;
+  authors: string;
+  pdf: string;
+  editor:String
 }

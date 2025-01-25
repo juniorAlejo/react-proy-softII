@@ -3,6 +3,7 @@ import { AiFillBook, AiFillFilePdf, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ResearchProjectDto } from "../../../types/ResearchProject";
 import { getResearchProject } from "../../../services/ResearchProject";
+import { formatDate } from "../../../utils/util";
 export const ResearchProject = () => {
 
   const [project, setProject] = useState<ResearchProjectDto[]>([]);
@@ -25,7 +26,7 @@ export const ResearchProject = () => {
   }, []);
 
   const handleCardClick = (project: ResearchProjectDto) => {
-    navigate(`/research-project/${project.IdResearchProject}`, {
+    navigate(`/student/research-project/${project.idResearchProject}`, {
       state: project,
     });
   };
@@ -47,7 +48,7 @@ export const ResearchProject = () => {
                 <AiOutlineSearch size={20} className="text-gray-400 mr-2" />
                 <input
                   type="text"
-                  placeholder="Buscar Proyectos..."
+                  placeholder="Buscar artículos..."
                   className="flex-grow text-lg focus:outline-none"
                 />
               </div>
@@ -65,36 +66,27 @@ export const ResearchProject = () => {
               <section className="w-3/4">
                 {project.map((project) => (
                   <article
-                    key={project.IdResearchProject}
+                    key={project.idResearchProject}
                     className="bg-white shadow-md rounded-lg p-4 mb-4"
                   >
                     <a
                       className="text-blue-600 text-lg font-bold hover:underline cursor-pointer"
                       onClick={() => handleCardClick(project)}
                     >
-                      {project.Name}
+                      {project.name}
                     </a>
-                    <p className="text-gray-400 text-sm">Año {project.Date}</p>
-                    <p className="text-gray-900 text-sm">
-                      Doi:{" "}
-                      <a
-                        href="#"
-                        className="text-secondary_light hover:underline"
-                      >
-                        {project.Doi}
-                      </a>
-                    </p>
+                    <p className="text-gray-400 text-sm"> Año {formatDate(project.date)}</p>
                     <p className="text-gray-900 text-sm">
                       <p>
                         Autores:{" "}
                         <span className="text-secondary_light">
-                          {project.Authors}
+                          {project.authors}
                         </span>
                       </p>
                     </p>
-                    <p className="text-gray-700 mt-2">{project.Description}</p>
+                    <p className="text-gray-700 mt-2">{project.description}</p>
                     <a
-                      href={project.Pdf}
+                      href={project.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-auto max-w-24 flex items-center mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
@@ -105,7 +97,7 @@ export const ResearchProject = () => {
                 ))}
               </section>
             )}
-            <aside className="w-1/4 h-[250px] bg-[#F8F8F8] p-4 rounded-lg ml-4">
+            <aside className="w-1/4 h-[250px] p-4 rounded-lg ml-4">
  
             </aside>
           </div>
