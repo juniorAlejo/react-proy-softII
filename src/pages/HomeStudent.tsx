@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hero } from "./components/Hero";
 import { TeacherDto } from "../types/Teacher";
-import { getTeacher } from "../services/Teacher";
+import { getTeacher } from "../services/Student/Teacher";
 
 export const HomeStudent = () => {
   const [docentes, setDocentes] = useState<TeacherDto[]>([]);

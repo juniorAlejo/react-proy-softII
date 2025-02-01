@@ -69,17 +69,16 @@ export default function VerificationAccount() {
             <button className="flex w-full items-center text-white justify-center gap-3.5 rounded-lg border border-stroke bg-primary p-4 hover:bg-primary_light">
               Verificar
             </button>
-
           </div>
         )}
-                    <div className="mt-6 text-center">
-              <p>
-                ¿Ya tienes una cuenta?{" "}
-                <Link to="/teacher/login" className="text-primary">
-                  Iniciar sesión
-                </Link>
-              </p>
-            </div>
+        <div className="mt-6 text-center">
+          <p>
+            ¿Ya tienes una cuenta?{" "}
+            <Link to="/teacher/login" className="text-primary">
+              Iniciar sesión
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

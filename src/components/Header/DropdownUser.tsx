@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ClickOutside from "../ClickOutside";
 
+
 const DropdownUser = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const userData = sessionStorage.getItem("userData");
+  const user = userData ? JSON.parse(userData) : null;
+
   const handleLogout = () => {
     sessionStorage.removeItem("isAuthenticated");
+    sessionStorage.removeItem("userData"); 
     navigate("/teacher/login");
   };
   return (
@@ -19,14 +24,14 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Jhair Arone
+          {user?.firstName} {user?.lastName}
           </span>
           <span className="block text-xs">DOCENTE</span>
         </span>
 
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <img
-            src="https://img.freepik.com/foto-gratis/cierrese-encima-retrato-cara-joven-hombre-barbudo_171337-2887.jpg?semt=ais_incoming"
+            src={user?.image || "https://cdn-icons-png.flaticon.com/512/6326/6326055.png"}
             alt="User"
             className="w-full h-full object-cover"
           />
@@ -77,7 +82,7 @@ const DropdownUser = () => {
                     fill=""
                   />
                 </svg>
-                My Perfil
+                Mi Perfil
               </Link>
             </li>
           </ul>
@@ -106,7 +111,7 @@ const DropdownUser = () => {
           </button>
         </div>
       )}
-      {/* <!-- Dropdown End --> */}
+
     </ClickOutside>
   );
 };

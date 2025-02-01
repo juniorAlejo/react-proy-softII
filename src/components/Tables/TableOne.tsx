@@ -1,25 +1,11 @@
-import { BRAND } from '../../types/brand';
 import Logo from '../../assets/img/logo.png';
-const brandData: BRAND[] = [
-  {
-    name: 'La inflación de marzo fue 7,7% según INDEC',
-    date: "12/2/12",
-  },
-  {
-    name: 'El equipo de básquet venció a Huracán',
-    date: "12/2/12",
-  },
-  {
-    name: 'El equipo de básquet venció a Huracán ',
-    date: "12/2/12",
-  },
-  {
-    name: 'El equipo de básquet venció a Huracán ',
-    date: "12/2/12",
-  }
-];
+import { TableState } from '../../types/Teacher/Home';
 
-const TableOne = () => {
+interface TableOneProps {
+  brandData: TableState[];
+}
+
+const TableOne: React.FC<TableOneProps> = ({ brandData }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
@@ -46,13 +32,12 @@ const TableOne = () => {
           >
             <div className="flex items-center gap-3 p-2.4 xl:p-4">
               <div className="flex-shrink-0">
-                <img src={Logo} className='w-10' alt="Brand" />
+                <img src={Logo} className="w-10" alt="Brand" />
               </div>
               <p className="hidden text-black dark:text-white sm:block">
                 {brand.name}
               </p>
             </div>
-
           </div>
         ))}
       </div>

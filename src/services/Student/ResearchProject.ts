@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ApiResponse } from "../types/Response/ApiResponse";
-import { ResearchProjectDto } from "../types/ResearchProject";
+import { ApiResponse } from "../../types/Response/ApiResponse";
+import { ResearchProjectDto } from "../../types/ResearchProject";
 
 //---------------------------------------------------------------- GET RESEARCH PROJECT
 export const getResearchProject = async (): Promise<ResearchProjectDto[]> => {

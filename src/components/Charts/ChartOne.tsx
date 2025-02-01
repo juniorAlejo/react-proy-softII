@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React from "react";
 import ReactApexChart from "react-apexcharts";
+import { ChartOneState } from "../../types/Teacher/Home";
 
 const options: ApexOptions = {
   legend: {
@@ -48,10 +49,6 @@ const options: ApexOptions = {
     width: [2, 2],
     curve: "straight",
   },
-  // labels: {
-  //   show: false,
-  //   position: "top",
-  // },
   grid: {
     xaxis: {
       lines: {
@@ -115,35 +112,7 @@ const options: ApexOptions = {
   },
 };
 
-interface ChartOneState {
-  series: {
-    name: string;
-    data: number[];
-  }[];
-}
-
-const ChartOne: React.FC = () => {
-  const [state, setState] = useState<ChartOneState>({
-    series: [
-      {
-        name: "Proyectos",
-        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
-      },
-
-      {
-        name: "Articulos",
-        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
-      },
-    ],
-  });
-
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-  handleReset;
-
+const ChartOne: React.FC<ChartOneState> = ({ series }) => {
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
@@ -153,7 +122,9 @@ const ChartOne: React.FC = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary_light"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-primary_light">Total de proyectos</p>
+              <p className="font-semibold text-primary_light">
+                Total de proyectos
+              </p>
             </div>
           </div>
           <div className="flex min-w-47.5">
@@ -161,7 +132,9 @@ const ChartOne: React.FC = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-secondary_light"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-secondary_light">Total de articulos</p>
+              <p className="font-semibold text-secondary_light">
+                Total de artículos
+              </p>
             </div>
           </div>
         </div>
@@ -171,7 +144,7 @@ const ChartOne: React.FC = () => {
         <div id="chartOne" className="-ml-5">
           <ReactApexChart
             options={options}
-            series={state.series}
+            series={series}
             type="area"
             height={350}
           />

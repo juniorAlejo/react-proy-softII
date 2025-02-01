@@ -4,7 +4,7 @@ import { Header } from "../components/HeaderStudent/Header";
 
 function StudentLayout() {
   return (
-    <div className="overflow-hidden relative min-h-screen flex flex-col">
+    <div className="overflow-hidden relative min-h-screen flex flex-col bg-white">
       <Header />
       <div className="flex-grow">
         <Outlet />

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AiFillBook, AiFillFilePdf, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ResearchProjectDto } from "../../../types/ResearchProject";
-import { getResearchProject } from "../../../services/ResearchProject";
+import { getResearchProject } from "../../../services/Student/ResearchProject";
 import { formatDate } from "../../../utils/util";
 export const ResearchProject = () => {
 

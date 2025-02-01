@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ApiResponse } from "../types/Response/ApiResponse";
-import { ScientificArticleDto } from "../types/ScientificArticle";
+import { ApiResponse } from "../../types/Response/ApiResponse";
+import { ScientificArticleDto } from "../../types/ScientificArticle";
 
 //---------------------------------------------------------------- GET ARTICLES
  export const getScientificArticle = async (): Promise<ScientificArticleDto[]> => {

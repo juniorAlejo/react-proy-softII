@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AiFillBook, AiFillFilePdf, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { getScientificArticle } from "../../../services/ScientificArticle";
+import { getScientificArticle } from "../../../services/Student/ScientificArticle";
 import { ScientificArticleDto } from "../../../types/ScientificArticle";
 import { formatDate } from "../../../utils/util";
 
@@ -150,6 +150,7 @@ export const ScientificArticle = () => {
                   { id: 1, name: "Revistas" },
                   { id: 2, name: "Procidis" },
                   { id: 3, name: "Patentes" },
+                  
                 ].map((level) => (
                   <li
                     key={level.id}

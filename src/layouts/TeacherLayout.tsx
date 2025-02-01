@@ -8,12 +8,12 @@ const TeacherLayout: React.FC<{ children: ReactNode }> = () => {
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
-      <div className="flex h-screen overflow-hidden">
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <div className="flex h-screen overflow-hidden ">
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <main className="mx-10 mt-8 mb-10">
-             <Outlet />
+          <main className="px-10 pt-8 pb-10 ">
+            <Outlet />
           </main>
         </div>
       </div>

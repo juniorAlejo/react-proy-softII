@@ -4,30 +4,71 @@ import { Link } from "react-router-dom";
 import LogoDark from "../../assets/img/logo_universidad.png";
 import LogoAuth from "../../assets/svg/auth.svg";
 import { ToastContainer, Bounce, toast } from "react-toastify";
+import { login } from "../../services/Teacher/Login";
 const TeacherLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e: any) => {
+  //---------------------------------------------------------------- POST LOGIN
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email === "admin@gmail.com" && password === "12345678") {
       sessionStorage.setItem("isAuthenticated", "true");
+      const data = {
+        firstName: "Victor",
+        lastName: "Alejo Andrade",
+        mail: "212108@unamba.edu.pe",
+        gender: "Masculino",
+        linkedIn: "http://www.linkedin.com",
 
-      toast.success("Bienvenido docente!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+        facebook: "http://www.facebook.com",
+        birthDate: "2003-04-26T00:00:00",
+        registrationCode: "xsax-1s2s23-1ws",
+        image:
+          "https://s3.abcstatics.com/media/summum/2021/10/01/maxi_iglesias-kU2E--1248x698@abc.jpeg",
+        description:
+          "Profesor Ordinario en la categoría de Principal en la Universidad Nacional Micaela Batidas de Apurímac - Perú. Ingeniero Informático y de Sistemas, con Magister en Ciencias mención Computación ",
+      };
+
+      sessionStorage.setItem("userData", JSON.stringify(data));
       navigate("/teacher");
-    } else {
-      toast.error("Credenciales incorrectas", {
+    }
+    try {
+      const response = await login({
+        email: email,
+        password: password,
+      });
+      if (response.success) {
+        sessionStorage.setItem("isAuthenticated", "true");
+        sessionStorage.setItem("userData", JSON.stringify(response.data));
+        toast.success("Bienvenido docente!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        navigate("/teacher");
+      } else {
+        toast.error("Credenciales incorrectas", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+    } catch (error) {
+      toast.error("Opps, algo salió mal!", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -140,7 +181,7 @@ const TeacherLogin = () => {
             </div>
             <div className="mb-5">
               <button
-                onClick={handleLogin}
+                onClick={handleSubmit}
                 value="Sign In"
                 className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
               >
