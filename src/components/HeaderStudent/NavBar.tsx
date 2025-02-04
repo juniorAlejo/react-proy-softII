@@ -6,7 +6,7 @@ export const Navbar = () => {
   const { pathname } = location;
 
   const handleNavigation = (path: string, title: string) => {
-    document.title = title; 
+    document.title = title;
     navigate(path);
   };
 
@@ -19,7 +19,7 @@ export const Navbar = () => {
         to={"/student"}
         onClick={(e) => {
           e.preventDefault();
-          handleNavigation("/student","Repositorio Académico");
+          handleNavigation("/student", "Repositorio Académico");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       >
@@ -69,14 +69,33 @@ export const Navbar = () => {
         to={"/student/contact"}
         onClick={(e) => {
           e.preventDefault();
-          handleNavigation(
-            "/student/contact",
-            "Soporte"
-          );
+          handleNavigation("/student/contact", "Soporte");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       >
         Soporte
+      </Link>
+
+      <Link
+        className={`${
+          pathname === "/teacher/verification"
+            ? "border-2 border-primary text-primary font-semibold"
+            : "border-2 border-secondary_light text-secondary_light"
+        } px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition duration-300`}
+        to={"/teacher/verification"}
+      >
+        Registrarse
+      </Link>
+
+      <Link
+        className={`${
+          pathname === "/teacher/login"
+            ? "bg-primary text-white font-semibold"
+            : "bg-secondary_light text-white"
+        } px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition duration-300`}
+        to={"/teacher/login"}
+      >
+        Iniciar Sesión
       </Link>
     </nav>
   );

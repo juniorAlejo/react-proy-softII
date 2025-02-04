@@ -55,25 +55,22 @@ export const ScientificArticleDetail: React.FC = () => {
             </p>
             <div className="space-y-4 text-sm">
               <p className="text-gray-600 mb-4">
-                <p className="font-bold">URI:</p>
-                <a
-                  href={article.doi}
-                  className="text-secondary_light underline"
+                <p className="font-bold">DOI:</p>
+                <p
+               
                 >
                   {article.doi}
-                </a>
+                </p>
               </p>
               <p className="text-gray-600 mb-4">
                 <span className="font-bold">Cómo citar:</span>
                 <p>
-                  Observatorio Tecnológico. (2024, diciembre). Boletín del
-                  Observatorio Tecnológico, año 2 (4). Carrera de Ingeniería de
-                  Sistemas. Universidad de Lima. {article.doi}
+                  Observatorio Tecnológico. ({new Date().getFullYear()},
+                  enero). Boletín del Observatorio Tecnológico, año{" "}
+                  {new Date().getFullYear() - 2022} (4). Carrera de Ingeniería
+                  Informática y de Sistemas. Universidad Nacional Micaela
+                  Bastidas de Apurímac.
                 </p>
-              </p>
-              <p className="text-gray-600 mb-4">
-                <span className="font-bold">Editor:</span>
-                <p>{article.editor}</p>
               </p>
 
               <p className="text-gray-600 mb-4">
@@ -118,7 +115,7 @@ export const ScientificArticleDetail: React.FC = () => {
               </p>
               <p className="text-gray-600 mb-4">
                 <span className="font-bold">Colección(es):</span>
-                <p> Boletín del Observatorio Tecnológico ULima [8]</p>
+                <p> Boletín del Observatorio Tecnológico - UNAMBA [8]</p>
               </p>
             </div>
           </div>

@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = "md" })
 
   return ReactDOM.createPortal(
     <div
-      className="fixed inset-0 bg-black bg-opacity-70 z-9999"
+      className="fixed inset-0 bg-black bg-opacity-70 z-999"
       onClick={onClose}
     >
       <div
@@ -28,7 +28,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = "md" })
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={`bg-white dark:bg-boxdark rounded-lg shadow-lg p-6 ${sizeClasses[size]} z-9999`}
+          className={`bg-white dark:bg-boxdark rounded-lg shadow-lg p-6 ${sizeClasses[size]} z-999`}
         >
           {children}
         </div>

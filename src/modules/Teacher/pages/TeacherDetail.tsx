@@ -1,20 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { FaFacebook, FaEnvelope, FaLinkedin } from "react-icons/fa";
 import { TeacherDto } from "../../../types/Teacher";
+import { getFormationsByTeacherId } from "../../../services/Teacher/Formation";
+import { Formation } from "../../../types/Teacher/FormationAcademic";
 
 export const TeacherDetail: React.FC = () => {
   const { state } = useLocation();
   const docente = state as TeacherDto;
-  console.log(docente)
+  console.log(docente);
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
+    fetchFormation();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   if (!docente) {
     return <div>No se encontraron datos para el docente con ID {id}</div>;
   }
+
+  const [formations, setFormations] = useState<Formation[]>([]);
+  //---------------------------------------------------------------- GER FORMATIONS
+  const fetchFormation = async () => {
+    try {
+      const formation = await getFormationsByTeacherId(id);
+
+      setFormations(formation);
+    } catch (error) {
+      console.error("Error al obtener la formacion:", error);
+    }
+  };
+
   return (
     <>
       <section className="sm:mt-14  px-4  max-w-6xl mx-auto pt-16 pb-4 flex flex-col sm:flex-row  gap-8">
@@ -37,8 +53,8 @@ export const TeacherDetail: React.FC = () => {
               <span>Perú</span>
             </li>
             <li className="flex justify-between">
-              <span className="font-bold">Código de Registro:</span>
-              <span>{docente.registrationCode}</span>
+              <span className="font-bold">Concytec:</span>
+              <span>{docente.concytec}</span>
             </li>
           </ul>
           <div className="flex justify-center space-x-4 mt-4">
@@ -85,6 +101,40 @@ export const TeacherDetail: React.FC = () => {
       <section className="mt-8 px-4 max-w-6xl mx-auto mb-12">
         <div className="mb-8">
           <h3 className="text-secondary_light text-lg font-bold mb-4 text-center sm:text-left">
+            FORMACION ACADEMICA
+          </h3>
+          <table className="w-full border-collapse border border-gray-300 text-sm">
+            <thead>
+              <tr className="bg-primary text-white">
+                <th className="border border-gray-300 p-2">Grado</th>
+                <th className="border border-gray-300 p-2">Titulo</th>
+
+                <th className="border border-gray-300 p-2">
+                  Centro de estudios
+                </th>
+                <th className="border border-gray-300 p-2">Pais de estudios</th>
+                <th className="border border-gray-300 p-2">Fuente</th>
+              </tr>
+            </thead>
+            <tbody>
+              {formations.map((form, index) => (
+                <tr key={index}>
+                  <td className="border border-gray-300 p-2">{form.degree}</td>
+                  <td className="border border-gray-300 p-2">{form.title}</td>
+                  <td className="border border-gray-300 p-2">
+                    {form.studyCenter}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {form.countryOfStudy}
+                  </td>
+                  <td className="border border-gray-300 p-2">{form.source}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mb-8">
+          <h3 className="text-secondary_light text-lg font-bold mb-4 text-center sm:text-left">
             EXPERIENCIA LABORAL
           </h3>
           <table className="w-full border-collapse border border-gray-300 text-sm">
@@ -106,13 +156,13 @@ export const TeacherDetail: React.FC = () => {
                   <td className="border border-gray-300 p-2">
                     {work.companyName}
                   </td>
-                  <td className="border border-gray-300 p-2">{work.position}</td>
+                  <td className="border border-gray-300 p-2">
+                    {work.position}
+                  </td>
                   <td className="border border-gray-300 p-2">
                     {work.jobDescription}
                   </td>
-                  <td className="border border-gray-300 p-2">
-                    {work.jobIdi}
-                  </td>
+                  <td className="border border-gray-300 p-2">{work.jobIdi}</td>
                   <td className="border border-gray-300 p-2">
                     {new Date(work.startDate).toLocaleDateString()}
                   </td>
@@ -151,11 +201,27 @@ export const TeacherDetail: React.FC = () => {
                     {teaching.institution}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {teaching.institutionType}
+                    {teaching.institutionType === "0" ||
+                    teaching.institutionType === 0
+                      ? "Pública"
+                      : teaching.institutionType === "1" ||
+                        teaching.institutionType === 1
+                      ? "Privada"
+                      : "Tipo Desconocido"}
                   </td>
+
                   <td className="border border-gray-300 p-2">
-                    {teaching.teacherType}
+                    {teaching.teacherType == "0" || teaching.teacherType === 0
+                      ? "Docente Titular"
+                      : teaching.teacherType == "1" ||
+                        teaching.teacherType === 1
+                      ? "Docente Asociado"
+                      : teaching.teacherType == "2" ||
+                        teaching.teacherType === 2
+                      ? "Docente Auxiliar"
+                      : "Tipo Desconocido"}
                   </td>
+
                   <td className="border border-gray-300 p-2">
                     {teaching.jobDescription}
                   </td>

@@ -17,10 +17,7 @@ export const ResearchProjectDetail: React.FC = () => {
   }
   return (
     <section className="mt-[130px] sm:mt-12 max-w-[1000px] mx-auto py-16">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">
-        Efectos de la ceniza de cascara de arroz sobre las propiedades mecánicas
-        y durabilidad de un concreto convencional, Lambayeque-2024
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">{project.name}</h1>
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex flex-col items-center lg:items-start w-full lg:w-1/4">
@@ -41,7 +38,8 @@ export const ResearchProjectDetail: React.FC = () => {
             </a>
             <div className="mt-4 space-y-2 text-sm">
               <p className="text-gray-600">
-                <span className="font-bold">Fecha:</span> <p>{formatDateComplete(project.date)}</p>
+                <span className="font-bold">Fecha:</span>{" "}
+                <p>{formatDateComplete(project.date)}</p>
               </p>
               <p className="text-gray-600">
                 <span className="font-bold">Autor(es):</span>
@@ -57,25 +55,14 @@ export const ResearchProjectDetail: React.FC = () => {
             </p>
             <div className="space-y-4 text-sm">
               <p className="text-gray-600 mb-4">
-                <p className="font-bold">URI:</p>
-                <a
-                  href={project.doi}
-                  className="text-secondary_light underline"
-                >
-                  {project.doi}
-                </a>
-              </p>
-              <p className="text-gray-600 mb-4">
                 <span className="font-bold">Cómo citar:</span>
                 <p>
-                  Observatorio Tecnológico. (2024, diciembre). Boletín del
-                  Observatorio Tecnológico, año 2 (4). Carrera de Ingeniería de
-                  Sistemas. Universidad de Lima. {project.doi}
+                  Observatorio Tecnológico. ({new Date().getFullYear()},
+                  enero). Boletín del Observatorio Tecnológico, año{" "}
+                  {new Date().getFullYear() - 2022} (4). Carrera de Ingeniería
+                  Informática y de Sistemas. Universidad Nacional Micaela
+                  Bastidas de Apurímac.
                 </p>
-              </p>
-              <p className="text-gray-600 mb-4">
-                <span className="font-bold">Editor:</span>
-                <p>{project.editor}</p>
               </p>
 
               <p className="text-gray-600 mb-4">
@@ -120,7 +107,7 @@ export const ResearchProjectDetail: React.FC = () => {
               </p>
               <p className="text-gray-600 mb-4">
                 <span className="font-bold">Colección(es):</span>
-                <p> Boletín del Observatorio Tecnológico ULima [8]</p>
+                <p> Boletín del Observatorio Tecnológico - UNAMBA [8]</p>
               </p>
             </div>
           </div>

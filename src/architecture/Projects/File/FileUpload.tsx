@@ -3,8 +3,7 @@ import Logo from "../../../assets/svg/upload.svg";
 import LogoDark from "../../../assets/svg/upload_dark.svg";
 
 type FileData = {
-  name: string;
-  size: number;
+  file: File;
   progress: number;
 };
 
@@ -21,9 +20,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
   onFileUpload,
   error,
 }) => {
-  const [file, setFile] = useState<FileData | null>(null);
+  const [fileData, setFileData] = useState<FileData | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
-  console.log(error);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
 
@@ -32,20 +31,16 @@ const FileUpload: React.FC<FileUploadProps> = ({
       const fileExtension = selectedFile.name.split(".").pop()?.toLowerCase();
 
       if (!fileExtension || !allowedFormats.includes(fileExtension)) {
-        setFile(null);
+        alert("Formato no permitido");
         return;
       }
 
       if (fileSizeMB > maxSizeMB) {
-        setFile(null);
+        alert("El archivo es demasiado grande");
         return;
       }
 
-      setFile({
-        name: selectedFile.name,
-        size: selectedFile.size,
-        progress: 0,
-      });
+      setFileData({ file: selectedFile, progress: 0 });
       setUploading(true);
     }
   };
@@ -53,28 +48,21 @@ const FileUpload: React.FC<FileUploadProps> = ({
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    if (uploading && file) {
+    if (uploading && fileData) {
       interval = setInterval(() => {
-        setFile((prevFile) => {
-          if (prevFile && prevFile.progress < 100) {
-            return {
-              ...prevFile,
-              progress: prevFile.progress + 10,
-            };
+        setFileData((prevData) => {
+          if (prevData && prevData.progress < 100) {
+            return { ...prevData, progress: prevData.progress + 10 };
+          } else {
+            clearInterval(interval);
+            setUploading(false);
+            if (prevData?.progress === 100) {
+              onFileUpload(prevData.file);
+            }
+            return prevData;
           }
-          return prevFile!;
         });
       }, 500);
-
-      if (file?.progress >= 100) {
-        setUploading(false);
-        onFileUpload(
-          new File([new Blob([file.name])], file.name, {
-            type: "application/octet-stream",
-          })
-        );
-        clearInterval(interval);
-      }
     }
 
     return () => {
@@ -82,7 +70,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         clearInterval(interval);
       }
     };
-  }, [uploading, file, onFileUpload]);
+  }, [uploading, fileData, onFileUpload]);
 
   return (
     <div
@@ -123,24 +111,24 @@ const FileUpload: React.FC<FileUploadProps> = ({
         ))}
       </div>
       <div className="w-full mt-4">
-        {file && (
+        {fileData && (
           <>
             <div className="flex justify-between text-sm text-gray-700 dark:text-white">
-              <span>{file.name}</span>
-              <span>{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+              <span>{fileData.file.name}</span>
+              <span>{(fileData.file.size / (1024 * 1024)).toFixed(2)} MB</span>
             </div>
             {uploading ? (
               <div className="w-full mt-2 bg-gray-200 rounded-full">
                 <div
                   className="bg-primary text-xs font-medium text-center text-white p-0.5 leading-none rounded-l-full"
-                  style={{ width: `${file.progress}%` }}
+                  style={{ width: `${fileData.progress}%` }}
                 >
-                  {file.progress}%
+                  {fileData.progress}%
                 </div>
               </div>
             ) : (
               <span className="text-xs text-gray-500 dark:text-white mt-2">
-                {file.progress === 100
+                {fileData.progress === 100
                   ? "Archivo subido con éxito"
                   : "Esperando..."}
               </span>

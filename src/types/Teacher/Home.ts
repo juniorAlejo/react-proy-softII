@@ -1,6 +1,5 @@
 export type IconKey = "BookCopy" | "Newspaper" | "CalendarArrowUp" | "ThumbsUp";
 
-  
 export interface Stat {
   title: string;
   total: string;
@@ -21,8 +20,7 @@ export interface TableState {
     date: string;
   }
 
-
-export interface UserData {
+export interface ReportData {
   user: {
     name: string;
     profileImage: string;

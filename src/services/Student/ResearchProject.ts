@@ -3,17 +3,13 @@ import { ApiResponse } from "../../types/Response/ApiResponse";
 import { ResearchProjectDto } from "../../types/ResearchProject";
 
 //---------------------------------------------------------------- GET RESEARCH PROJECT
-export const getResearchProject = async (): Promise<ResearchProjectDto[]> => {
+export const getResearchProjects = async (): Promise<ResearchProjectDto[]> => {
   try {
-    const response = await axios.get<ApiResponse>(
+    const { data } = await axios.get<ApiResponse<ResearchProjectDto[]>>(
       `${import.meta.env.VITE_API_URL}/Research/GetAllResearchProject`
     );
-    if (response.data.success) {
-      return response.data.data;
-    } else {
-      throw new Error(response.data.msg);
-    }
+    return data.data; 
   } catch (error) {
-    throw new Error("Error al obtener proyectos de investigacion");
+    throw new Error("Error al obtener proyectos de investigación");
   }
 };

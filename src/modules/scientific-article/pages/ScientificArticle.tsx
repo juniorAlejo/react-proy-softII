@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AiFillBook, AiFillFilePdf, AiOutlineSearch } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { getScientificArticle } from "../../../services/Student/ScientificArticle";
+import { getScientificArticles } from "../../../services/Student/ScientificArticle";
 import { ScientificArticleDto } from "../../../types/ScientificArticle";
 import { formatDate } from "../../../utils/util";
 
@@ -15,14 +15,16 @@ export const ScientificArticle = () => {
   const [searchText, setSearchText] = useState<string>("");
   const navigate = useNavigate();
 
-  // ---------------------------------------------------------------- GET ARTICLES
   useEffect(() => {
     const loadArticles = async () => {
       try {
         setLoading(true);
-        const fetchedArticles = await getScientificArticle();
-        setArticles(fetchedArticles);
-        setFilteredArticles(fetchedArticles);
+        const fetchedArticles = await getScientificArticles();
+        
+        const filtered = fetchedArticles.filter(article => article.estatus === 1);
+  
+        setArticles(filtered);
+        setFilteredArticles(filtered);
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch articles:", error);
@@ -30,6 +32,7 @@ export const ScientificArticle = () => {
     };
     loadArticles();
   }, []);
+  
 
   // ---------------------------------------------------------------- FILTER ARTICLES LEVEL OR SEARCH
   useEffect(() => {
@@ -45,7 +48,7 @@ export const ScientificArticle = () => {
   }, [selectedLevel, searchText, articles]);
 
   const handleCardClick = (article: ScientificArticleDto) => {
-    navigate(`/student/scientific-article/${article.idScientificArticle}`, {
+    navigate(`/student/scientific-article/${article.id}`, {
       state: article,
     });
   };
@@ -91,7 +94,7 @@ export const ScientificArticle = () => {
                 {filteredArticles.length > 0 ? (
                   filteredArticles.map((article) => (
                     <article
-                      key={article.idScientificArticle}
+                      key={article.id}
                       className="bg-white shadow-md rounded-lg p-4 mb-4"
                     >
                       <a
@@ -147,10 +150,9 @@ export const ScientificArticle = () => {
               <ul className="space-y-2">
                 {[
                   { id: null, name: "Todos" },
-                  { id: 1, name: "Revistas" },
-                  { id: 2, name: "Procidis" },
-                  { id: 3, name: "Patentes" },
-                  
+                  { id: 0, name: "Revistas" },
+                  { id: 1, name: "Procidis" },
+                  { id: 2, name: "Patentes" },
                 ].map((level) => (
                   <li
                     key={level.id}

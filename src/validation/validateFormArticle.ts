@@ -4,19 +4,19 @@ export const validateForm = (data: Article) => {
   let tempErrors: Record<string, string> = {};
   let isValid = true;
 
-  if (!data.title.trim()) {
-    tempErrors.title = "El título es requerido";
+  if (!data.name.trim()) {
+    tempErrors.name = "El título es requerido";
     isValid = false;
-  } else if (data.title.length < 5) {
-    tempErrors.title = "El título debe tener al menos 5 caracteres.";
+  } else if (data.name.length < 5) {
+    tempErrors.name = "El título debe tener al menos 5 caracteres.";
     isValid = false;
   }
 
-  if (!data.link.trim()) {
-    tempErrors.link = "El enlace es requerido.";
+  if (!data.pdf.trim()) {
+    tempErrors.pdf = "El enlace es requerido.";
     isValid = false;
-  } else if (!/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(data.link)) {
-    tempErrors.link = "Formato de URL no válido.";
+  } else if (!/^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(data.pdf)) {
+    tempErrors.pdf = "Formato de URL no válido.";
     isValid = false;
   }
 
@@ -31,7 +31,7 @@ export const validateForm = (data: Article) => {
   }
 
   if (!data.description.trim()) {
-    tempErrors.description = "La descripción es requerido.";
+    tempErrors.description = "La descripción es requerida.";
     isValid = false;
   } else if (data.description.length < 10) {
     tempErrors.description =
@@ -43,7 +43,12 @@ export const validateForm = (data: Article) => {
     tempErrors.summary = "El resumen es requerido.";
     isValid = false;
   } else if (data.summary.length < 20) {
-    tempErrors.summary = "El resumen debe tener al menos 10 caracteres.";
+    tempErrors.summary = "El resumen debe tener al menos 20 caracteres.";
+    isValid = false;
+  }
+
+  if (!data.authors.trim()) {
+    tempErrors.authors = "Los autores son requeridos.";
     isValid = false;
   }
 

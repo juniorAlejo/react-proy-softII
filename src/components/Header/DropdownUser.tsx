@@ -15,6 +15,20 @@ const DropdownUser = () => {
     sessionStorage.removeItem("userData"); 
     navigate("/teacher/login");
   };
+
+  const getFirstNameAndLastName = (fullName: string | undefined) => {
+    if (!fullName) return "";
+    const parts = fullName.split(" ");
+    return parts[0]; 
+  };
+  
+  const getFirstLastName = (fullLastName: string | undefined) => {
+    if (!fullLastName) return "";
+    const parts = fullLastName.split(" ");
+    return parts[0]; 
+  };
+  
+
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -24,7 +38,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-          {user?.firstName} {user?.lastName}
+          {getFirstNameAndLastName(user?.firstName)} {getFirstLastName(user?.lastName)}
           </span>
           <span className="block text-xs">DOCENTE</span>
         </span>

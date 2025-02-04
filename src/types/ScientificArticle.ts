@@ -1,5 +1,5 @@
 export interface ScientificArticleDto {
-  idScientificArticle: number;
+  id: number;
   name: string;
   description: string;
   summary: string;
@@ -7,6 +7,6 @@ export interface ScientificArticleDto {
   doi: string;
   authors: string;
   pdf: string;
-  editor:String
+  estatus:number
   idNivel: number;
 }

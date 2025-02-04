@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hero } from "./components/Hero";
 import { TeacherDto } from "../types/Teacher";
-import { getTeacher } from "../services/Student/Teacher";
+import { getTeachers } from "../services/Student/Teacher";
 
 export const HomeStudent = () => {
   const [docentes, setDocentes] = useState<TeacherDto[]>([]);
@@ -14,9 +14,16 @@ export const HomeStudent = () => {
     const loadProducts = async () => {
       try {
         setLoading(true);
-        const products = await getTeacher();
+        const products = await getTeachers();
         console.log(products);
-        setDocentes(products);
+
+        if (products == null) {
+          setDocentes([]);
+        } else {
+          setDocentes(products);
+        }
+
+        
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -26,7 +33,7 @@ export const HomeStudent = () => {
   }, []);
 
   const handleCardClick = (docente: TeacherDto) => {
-    navigate(`/student/teacher/${docente.idTeacher}`, { state: docente });
+    navigate(`/student/teacher/${docente.id}`, { state: docente });
   };
 
   return (
@@ -49,22 +56,23 @@ export const HomeStudent = () => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
               {docentes.map((docente) => (
                 <div
-                  key={docente.idTeacher}
+                  key={docente.id}
                   className="max-w-xs mx-auto rounded-lg overflow-hidden shadow-lg bg-white transition-transform transform hover:scale-105 cursor-pointer"
                   style={{ height: "350px" }}
                   onClick={() => handleCardClick(docente)}
                 >
                   <img
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-contain"
                     src={docente.image}
                     alt={docente.firstName}
                   />
+
                   <div className="p-4 flex flex-col justify-between">
                     <h4 className="text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap">
                       {docente.firstName} {docente.lastName}
                     </h4>
                     <p className="text-xl font-semibold text-gray-800">
-                      {docente.position}
+                      Ingeniería en informática y sistemas
                     </p>
                   </div>
                 </div>

@@ -1,12 +1,9 @@
 import { Product } from '../../types/product';
-import ProductOne from '../../images/product/product-01.png';
-import ProductTwo from '../../images/product/product-02.png';
-import ProductThree from '../../images/product/product-03.png';
-import ProductFour from '../../images/product/product-04.png';
+
 
 const productData: Product[] = [
   {
-    image: ProductOne,
+
     name: 'Apple Watch Series 7',
     category: 'Electronics',
     price: 296,
@@ -14,7 +11,7 @@ const productData: Product[] = [
     profit: 45,
   },
   {
-    image: ProductTwo,
+
     name: 'Macbook Pro M1',
     category: 'Electronics',
     price: 546,
@@ -22,7 +19,7 @@ const productData: Product[] = [
     profit: 125,
   },
   {
-    image: ProductThree,
+
     name: 'Dell Inspiron 15',
     category: 'Electronics',
     price: 443,
@@ -30,7 +27,7 @@ const productData: Product[] = [
     profit: 247,
   },
   {
-    image: ProductFour,
+ 
     name: 'HP Probook 450',
     category: 'Electronics',
     price: 499,
@@ -72,14 +69,7 @@ const TableTwo = () => {
           key={key}
         >
           <div className="col-span-3 flex items-center">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <div className="h-12.5 w-15 rounded-md">
-                <img src={product.image} alt="Product" />
-              </div>
-              <p className="text-sm text-black dark:text-white">
-                {product.name}
-              </p>
-            </div>
+
           </div>
           <div className="col-span-2 hidden items-center sm:flex">
             <p className="text-sm text-black dark:text-white">
