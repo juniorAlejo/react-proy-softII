@@ -529,7 +529,7 @@ const TeacherProfile = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 px-4 xsm:flex-row">
                   <span className="font-semibold text-black dark:text-white">
-                    {docente.registrationCode}
+                    {docente.concytec}
                   </span>
                 </div>
               </div>
@@ -696,24 +696,24 @@ const TeacherProfile = () => {
 
                   <div className="mb-4 w-1/4">
                     <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                      Código de Registro
+                     Renacyt
                     </label>
                     <input
-                      id="registrationCode"
+                      id="concytec"
                       type="text"
-                      name="registrationCode"
+                      name="concytec"
                       placeholder="0000"
                       className={`w-full rounded border-[1.5px] ${
-                        errors.registrationCode
+                        errors.concytec
                           ? "border-red-500 dark:border-red-500"
                           : "border-stroke dark:border-form-strokedark"
                       } bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:bg-form-input dark:text-white dark:focus:border-primary`}
-                      value={data.registrationCode}
+                      value={data.concytec}
                       onChange={handleInputChange}
                     />
-                    {errors.registrationCode && (
+                    {errors.concytec && (
                       <p className="text-red-500 text-sm mt-1">
-                        {errors.registrationCode}
+                        {errors.concytec}
                       </p>
                     )}
                   </div>

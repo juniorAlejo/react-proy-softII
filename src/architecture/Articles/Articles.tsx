@@ -296,10 +296,10 @@ const Articles = () => {
                   Autores
                 </th>
                 <th className="py-4 px-1 font-medium text-black dark:text-white ">
-                  Pdf
+                  Url
                 </th>
                 <th className="py-4 px-1 font-medium text-black dark:text-white xl:pl-11">
-                  Editor
+                  Estado
                 </th>
                 <th className=" py-4 px-1 font-medium text-black dark:text-white">
                   Tipo de articulo
@@ -521,12 +521,12 @@ const Articles = () => {
                   <div className="row flex gap-4">
                     <div className="mb-4.5 w-2/6">
                       <label className="mb-2.5 block text-black dark:text-white">
-                        Pdf
+                        Url
                       </label>
                       <input
                         type="url"
                         name="pdf"
-                        placeholder="Ingrese el enlace"
+                        placeholder="Ingrese el enlace del pdf"
                         className={`w-full rounded border-[1.5px] ${
                           errors.pdf
                             ? "border-red-500 dark:border-red-500"
@@ -600,7 +600,7 @@ const Articles = () => {
                               value={1}
                               className="text-body dark:text-bodydark"
                             >
-                              Procidis
+                              Proceedings
                             </option>
                             <option
                               value={2}

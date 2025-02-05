@@ -131,7 +131,7 @@ const CreateArticle = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Crear artículo" />
+      <Breadcrumb pageName="Crear Artículo" />
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
@@ -161,12 +161,12 @@ const CreateArticle = () => {
                 <div className="row flex gap-4">
                   <div className="mb-4.5 w-3/5">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Pdf
+                      Url
                     </label>
                     <input
                       type="url"
                       name="pdf"
-                      placeholder="Ingrese el enlace"
+                      placeholder="Ingrese el enlace del pdf"
                       className={`w-full rounded border-[1.5px] ${
                         errors.pdf
                           ? "border-red-500 dark:border-red-500"
@@ -181,7 +181,7 @@ const CreateArticle = () => {
                   </div>
                   <div className="mb-4.5 w-2/5">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Doi
+                      DOI
                     </label>
                     <input
                       type="text"
@@ -235,7 +235,7 @@ const CreateArticle = () => {
                           value={1}
                           className="text-body dark:text-bodydark"
                         >
-                          Procidis
+                          Proceedings
                         </option>
                         <option
                           value={2}

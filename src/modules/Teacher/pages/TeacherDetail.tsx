@@ -53,7 +53,7 @@ export const TeacherDetail: React.FC = () => {
               <span>Perú</span>
             </li>
             <li className="flex justify-between">
-              <span className="font-bold">Concytec:</span>
+              <span className="font-bold">Renacyt:</span>
               <span>{docente.concytec}</span>
             </li>
           </ul>

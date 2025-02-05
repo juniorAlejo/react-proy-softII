@@ -321,13 +321,13 @@ const TeacherRegister: React.FC = () => {
                   </div>
                   <div className="w-1/2 px-4 mb-4">
                     <label className="mb-2.5 block font-medium text-black dark:text-white">
-                      CONCYTEC
+                      RENACYT
                     </label>
                     <div className="relative">
                       <input
                         type="text"
                         name="concytec"
-                        placeholder="Ingrese tu concytec"
+                        placeholder="Ingrese tu renacyt"
                         className={`w-full rounded border-[1.5px] ${
                           errors.concytec
                             ? "border-red-500 dark:border-red-500"

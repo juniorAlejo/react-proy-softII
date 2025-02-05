@@ -27,20 +27,11 @@ export const validateFormLaboral = (data: ExperienceLaboral) => {
     isValid = false;
   }
 
-  if (!data.jobIdi.trim()) {
-    tempErrors.jobIdi = "El identificador del cargo es requerido.";
-    isValid = false;
-  }
-
   if (!data.startDate.trim()) {
     tempErrors.startDate = "La fecha de inicio es requerida.";
     isValid = false;
   }
 
-  if (!data.endDate.trim()) {
-    tempErrors.endDate = "La fecha de fin es requerida.";
-    isValid = false;
-  }
 
   return { tempErrors, isValid };
 };

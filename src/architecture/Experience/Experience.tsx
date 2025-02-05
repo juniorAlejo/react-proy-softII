@@ -672,7 +672,7 @@ const Experience = () => {
                 <div className="flex gap-4">
                   <div className="w-full mb-4.5">
                     <label className="mb-2.5 block text-black dark:text-white">
-                      Cargo en IDI
+                      Cargo en I+d+i
                     </label>
                     <input
                       type="text"

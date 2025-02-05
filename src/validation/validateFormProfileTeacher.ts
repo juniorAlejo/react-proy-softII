@@ -18,8 +18,8 @@ export const validateForm = (formData: any) => {
     isValid = false;
   }
 
-  if (!formData.registrationCode) {
-    tempErrors.registrationCode = "El código de registro es obligatorio.";
+  if (!formData.renacyt) {
+    tempErrors.renacyt = "El código renacyt es obligatorio.";
     isValid = false;
   }
 

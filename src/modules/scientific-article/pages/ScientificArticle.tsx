@@ -107,9 +107,9 @@ export const ScientificArticle = () => {
                         Año {formatDate(article.date)}
                       </p>
                       <p className="text-gray-900 text-sm">
-                        Doi:{" "}
+                        DOI:{" "}
                         <a
-                          href="#"
+                          href={article.pdf}
                           className="text-secondary_light hover:underline"
                         >
                           {article.doi}
@@ -151,7 +151,7 @@ export const ScientificArticle = () => {
                 {[
                   { id: null, name: "Todos" },
                   { id: 0, name: "Revistas" },
-                  { id: 1, name: "Procidis" },
+                  { id: 1, name: "Proceedings" },
                   { id: 2, name: "Patentes" },
                 ].map((level) => (
                   <li

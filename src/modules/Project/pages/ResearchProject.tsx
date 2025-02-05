@@ -54,7 +54,7 @@ export const ResearchProject = () => {
             <div className="w-full flex items-center space-x-3">
               <AiFillBook size={32} className="text-primary_light" />
               <h1 className="text-3xl font-bold text-primary_light">
-                Proyectos de investigación
+                Proyectos de Investigación
               </h1>
             </div>
 
